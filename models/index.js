@@ -13,12 +13,12 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.posts = require("./post.js")(sequelize, Sequelize);
-db.categories = require("./category.js")(sequelize, Sequelize);
+// db.categories = require("./category.js")(sequelize, Sequelize);
 
-db.categories.hasMany(db.posts, { as: "posts" });
-db.posts.belongsTo(db.categories, {
-    foreignKey: "categoryId",
-    as: "category",
-});
+// db.categories.hasMany(db.posts, { as: "posts" });
+// db.posts.belongsTo(db.categories, {
+//     foreignKey: "categoryId",
+//     as: "category",
+// });
 
 module.exports = db;

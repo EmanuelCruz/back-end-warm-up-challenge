@@ -19,18 +19,14 @@ module.exports = (sequelize, DataTypes) => {
             creationDate: {
                 type: DataTypes.DATE,
             },
+            category: {
+                type: DataTypes.STRING,
+            },
         },
         {
             timestamps: false,
         }
     );
-
-    // Post.associate = function (models) {
-    //     Post.belongsTo(models.Category, {
-    //         as: "category",
-    //         foreignKey: "categoryId",
-    //     });
-    // };
 
     return Post;
 };

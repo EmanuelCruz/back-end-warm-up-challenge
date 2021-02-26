@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const apiRouter = require("./routes/api");
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 const db = require("./models");
 
@@ -11,38 +13,25 @@ db.sequelize.sync({ force: true }).then(() => {
 
 const controller = require("./controllers/index");
 const run = async () => {
-    const category1 = await controller.createCategory({
-        name: "Informática",
+    const post1 = await controller.createPost({
+        title: "post1",
+        content: "content1",
+        image: "image1.jpg",
+        creationDate: "2020-07-01",
+        category: "Cine",
     });
-
-    const category2 = await controller.createCategory({
-        name: "Cocina",
+    const post2 = await controller.createPost({
+        title: "post2",
+        content: "content2",
+        image: "image2.jpg",
+        creationDate: "2020-01-01",
+        category: "Comida",
     });
-
-    const category3 = await controller.createCategory({
-        name: "Deportes",
-    });
-
-    const category4 = await controller.createCategory({
-        name: "Cine",
-    });
-
-    // const post1 = await controller.createPost(1, {
-    //     title: "Title post 1",
-    //     content: "Content post1",
-    //     image: "imagenpost1.jpg",
-    //     creationDate: "2020-10-01",
-    // });
-
-    // const post2 = await controller.createPost(category1.id, {
-    //     title: "Title post 2",
-    //     content: "Content post2",
-    //     image: "imagenpost2.jpg",
-    //     creationDate: "2020-10-01",
-    // });
 
     console.log("Datos ingresados");
 };
+
+app.use("/api", apiRouter);
 
 app.listen(3000, () => {
     console.log("servidor arrancado");
